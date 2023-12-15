@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registered Endpoints</title>
+</head>
+<body>
+    <h1>Registered Endpoints</h1>
+    <ul>
+        {{range .Routes}}
+            <li>{{.Method}} - {{.Path}}</li>
+        {{end}}
+    </ul>
+</body>
+</html>
+
