@@ -11,7 +11,7 @@ BINARY_NAME=myapp
 all: test build
 
 build:
-	$(GOBUILD) -ldflags "-X main.Version=$(git describe --tags --abbrev=0)" -o $(BINARY_NAME) main.go version.go
+	$(GOBUILD) -ldflags "-X main.Version=`git describe --tags --abbrev=0`" -o $(BINARY_NAME) main.go version.go
 
 test:
 	$(GOTEST) -v ./...
