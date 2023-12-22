@@ -1,4 +1,4 @@
-package golang-echo-admin
+package golang_echo_admin
 
 import (
 	"fmt"
@@ -7,6 +7,11 @@ import (
 
 	stats_api "github.com/fukata/golang-stats-api-handler"
 	"github.com/labstack/echo"
+)
+
+var (
+	e, a   *echo.Echo
+	appVer *AppVersion
 )
 
 func adminGetEnvironmentHandler(c echo.Context) error {
