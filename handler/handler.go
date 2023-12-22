@@ -1,4 +1,4 @@
-package golang_echo_admin
+package handler
 
 import (
 	"fmt"
