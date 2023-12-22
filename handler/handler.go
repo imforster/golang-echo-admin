@@ -11,8 +11,12 @@ import (
 
 var (
 	e, a   *echo.Echo
-	appVer *AppVersion
+	appVer *string
 )
+
+func Handler(version *string) {
+	appVer = version
+}
 
 func adminGetEnvironmentHandler(c echo.Context) error {
 	env := "Environment stuff..."

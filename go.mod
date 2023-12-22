@@ -1,9 +1,9 @@
-module echo-admin-example
+module github.com/imforster/golang-echo-admin
 
 go 1.21.3
 
 require (
-	github.com/imforster/golang-echo-admin v0.0.0-20231222201712-8321844db142
+	github.com/fukata/golang-stats-api-handler v1.0.0
 	github.com/labstack/echo v3.3.10+incompatible
 )
 

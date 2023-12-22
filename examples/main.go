@@ -35,15 +35,15 @@ func main() {
 	// a.HidePort = true
 
 	// // Routes
-	e.GET("/", handler)
+	e.GET("/", helloHandler)
 
-	a.GET("/admin/mappings", adminMappingHandler)
-	a.GET("/admin/metrics", adminGetMetricsHandler)
-	a.GET("/admin/info", adminInfoHandler)
-	a.GET("/admin/config", adminGetConfigHandler)
-	a.GET("/admin/env", adminGetEnvironmentHandler)
-	a.POST("/admin/shutdown", adminPostShutdownHandler)
-	a.GET("/health", healthHandler)
+	a.GET("/admin/mappings", handler.adminMappingHandler)
+	a.GET("/admin/metrics", handler.adminGetMetricsHandler)
+	a.GET("/admin/info", handler.adminInfoHandler)
+	a.GET("/admin/config", hanlder.adminGetConfigHandler)
+	a.GET("/admin/env", handler.adminGetEnvironmentHandler)
+	a.POST("/admin/shutdown", handler.adminPostShutdownHandler)
+	a.GET("/health", handler.healthHandler)
 
 	// List of ports to listen on
 	ports := []string{"8080", "9090"}
@@ -61,6 +61,6 @@ func main() {
 	wg.Wait()
 }
 
-func handler(c echo.Context) error {
+func helloHandler(c echo.Context) error {
 	return c.String(http.StatusOK, "Hello, World!")
 }
