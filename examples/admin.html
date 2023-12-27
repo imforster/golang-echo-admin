@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Registered Endpoints</title>
+</head>
+<body>
+    <div class="w3-container w3-teal" style="width:50%">
+        <h1 class="text-3xl font-bold underline">Registered Endpoints</h1>
+    </div>
+    <ul>
+        <div class="w3-panel w3-gray w3-card-4" style="width:35%">  
+        <p>Method - Path</p>
+        </div>
+        {{range .Routes}}
+        <div class="w3-row"></div>
+        <div class="w3-col m4 l1">
+            {{ if (eq .Method "GET") }}
+            <div class="w3-panel w3-green w3-card-4" >  
+            {{.Method}}
+            {{ end }}
+            {{ if (eq .Method "POST") }}
+            <div class="w3-panel w3-orange w3-card-4" >  
+            {{.Method}}
+            {{ end }}
+            </div>
+            </div>
+            <div class="w3-col m12 l3">
+            <div class="w3-panel w3-blue w3-card-4">  
+                {{.Path}}
+            </div>
+            </div>
+        </div>
+        {{end}}
+    </ul>
+</body>
+</html>
+

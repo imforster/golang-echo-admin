@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"sync"
 
+	"github.com/imforster/golang-echo-admin/handler"
 	"github.com/labstack/echo"
-	"github.com/imforster/golang-echo-admin"
 )
 
 var (
@@ -25,25 +25,16 @@ func main() {
 	appVer = &AppVersion{
 		Version: Version,
 	}
+
 	fmt.Println("My Go Application")
 	fmt.Println("Version:", appVer.Version)
 	var wg sync.WaitGroup
 	// Echo instance
 	e = echo.New()
-	a = echo.New()
-	a.HideBanner = true
-	// a.HidePort = true
+	a := handler.New(e, &appVer.Version)
 
 	// // Routes
 	e.GET("/", helloHandler)
-
-	a.GET("/admin/mappings", handler.adminMappingHandler)
-	a.GET("/admin/metrics", handler.adminGetMetricsHandler)
-	a.GET("/admin/info", handler.adminInfoHandler)
-	a.GET("/admin/config", hanlder.adminGetConfigHandler)
-	a.GET("/admin/env", handler.adminGetEnvironmentHandler)
-	a.POST("/admin/shutdown", handler.adminPostShutdownHandler)
-	a.GET("/health", handler.healthHandler)
 
 	// List of ports to listen on
 	ports := []string{"8080", "9090"}
@@ -59,6 +50,23 @@ func main() {
 	}
 
 	wg.Wait()
+
+	// Wait for interrupt signal to gracefully shutdown the server
+	// quit := make(chan os.Signal)
+	// signal.Notify(quit, os.Interrupt)
+	// <-quit
+
+	// fmt.Println("Server shutting down...")
+
+	// // Create a context to wait for a graceful shutdown
+	// ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	// defer cancel()
+
+	// if err := e.Shutdown(ctx); err != nil {
+	// 	fmt.Println(err)
+	// }
+
+	// fmt.Println("Server shutdown complete")
 }
 
 func helloHandler(c echo.Context) error {
