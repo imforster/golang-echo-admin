@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"sync"
 
+	"github.com/imforster/golang-echo-admin/config"
 	"github.com/imforster/golang-echo-admin/handler"
 	"github.com/labstack/echo"
 )
@@ -22,6 +24,19 @@ func startServer(port string, wg *sync.WaitGroup, e *echo.Echo) {
 }
 
 func main() {
+	configFile := "config.yaml"
+
+	// Initialize configuration without injecting
+	appConfig, err := config.InitConfig(configFile)
+	if err != nil {
+		log.Fatalf("Error initializing config: %s", err)
+	}
+
+	// Access and use the configuration
+	fmt.Println("Server Port:", appConfig.Server.Port)
+	fmt.Println("Logging Level:", appConfig.Logging.Level)
+	fmt.Println("Database Name:", appConfig.Database.Name)
+
 	appVer = &AppVersion{
 		Version: Version,
 	}
@@ -31,7 +46,7 @@ func main() {
 	var wg sync.WaitGroup
 	// Echo instance
 	e = echo.New()
-	a := handler.New(e, &appVer.Version)
+	a := handler.New(e, &appVer.Version, "../handler")
 
 	// // Routes
 	e.GET("/", helloHandler)

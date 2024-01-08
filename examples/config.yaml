@@ -1,0 +1,12 @@
+# config.yaml
+server:
+  port: 8080
+  host: localhost
+logging:
+  level: info
+  file: /path/to/log/file.log
+# database:
+#   name: mydb
+#   user: myuser
+#   password: mypassword
+  # ... other database configuration

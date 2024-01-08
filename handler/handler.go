@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -17,9 +18,10 @@ import (
 var (
 	e, a   *echo.Echo
 	appVer *string
+	path   string
 )
 
-func New(mainEcho *echo.Echo, version *string) *echo.Echo {
+func New(mainEcho *echo.Echo, version *string, templatePath string) *echo.Echo {
 	e = mainEcho
 	adminEcho := echo.New()
 	adminEcho.HideBanner = true
@@ -27,6 +29,7 @@ func New(mainEcho *echo.Echo, version *string) *echo.Echo {
 	if version != nil {
 		appVer = version
 	}
+	path = templatePath
 
 	a.GET("/admin/mappings", adminMappingHandler)
 	a.GET("/admin/metrics", AdminGetMetricsHandler)
@@ -93,7 +96,7 @@ func HealthHandler(c echo.Context) error {
 
 	// If all checks pass, indicate the server is healthy
 	status := map[string]string{
-		"status": "ok",
+		"status": "UP",
 	}
 	prettyJSON, err := json.MarshalIndent(status, "", "  ")
 	if err != nil {
@@ -134,7 +137,9 @@ func adminMappingHandler(c echo.Context) error {
 	}
 
 	// Create a new template and parse the HTML file
-	t := template.Must(template.ParseFiles("../handler/admin.html"))
+	adminPath := filepath.Join(path, "admin.html")
+	// t := template.Must(template.ParseFiles("../handler/admin.html"))
+	t := template.Must(template.ParseFiles(adminPath))
 
 	// Execute the template with the routes data
 	data := struct {
