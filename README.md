@@ -7,7 +7,7 @@ The implementation of the features included in this repository was inspired from
 
 #### What you might find helpful in this repo.
 - [x] [echo](https://github.com/labstack/echo)(Framework) for handling requests
-- [x] [golang-stats-api-handler](github.com/fukata/golang-stats-api-handler)
+- [x] [golang-stats-api-handler](https://github.com/fukata/golang-stats-api-handler)
 - [x] [Production-ready Features -- Spring](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)
 
 ## How to run
