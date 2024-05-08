@@ -155,6 +155,7 @@ func adminMappingHandler(c echo.Context) error {
 	}
 
 	// Execute the template and handle errors
+
 	err := t.Execute(c.Response().Writer, data)
 	if err != nil {
 		// Handle the error, for instance, log it
